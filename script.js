@@ -2,20 +2,22 @@ const username = "marceybee";
 const projectsContainer = document.getElementById("projects");
 
 fetch(`https://api.github.com/users/${username}/repos`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+    .then(response => {
+        if (!response.ok) {
+        throw new Error("Network response was not ok");
     }
     return response.json();
   })
-  .then(repos => {
-    repos.forEach(repo => {
-      const projectCard = document.createElement("div");
+    .then(repos => {
+        repos.forEach(repo => {
+        const projectCard = document.createElement("div");
+
+      projectCard.classList.add("project-card");
 
       projectCard.innerHTML = `
-        <h2>${repo.name}</h2>
-        <p>${repo.description || "No description provided."}</p>
-        <a href="${repo.html_url}" target="_blank">View Repository</a>
+        <h2 class="project-title">${repo.name}</h2>
+        <p class="project-description">${repo.description || "No description provided."}</p>
+        <a class="project-link" href="${repo.html_url}" target="_blank">View Repository</a>
       `;
 
       projectsContainer.appendChild(projectCard);
